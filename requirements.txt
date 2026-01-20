@@ -2,5 +2,5 @@ langchain==1.2.2
 langchain-core==1.2.6
 langchain-google-genai==4.1.3
 langchain-mcp-adapters
-fastmcp
+fastmcp==2.14.3
 python-dotenv==1.2.1

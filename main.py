@@ -17,6 +17,7 @@ If initialization or execution fails, errors are logged with stack trace details
 and appropriate cleanup is performed.
 """
 import asyncio
+from langchain_core.messages import HumanMessage
 from logger_config import setup_logger
 from client import client
 from agent import create_budget_agent
@@ -46,7 +47,7 @@ async def main():
         # Example 1: Calculate food costs
         logger.info("Processing example query: food cost calculation")
         result = await agent.ainvoke({
-            "input": "Calculate food cost for 5 days at 500 rupees per day"
+            "messages": [HumanMessage(content="Calculate food cost for 5 days at 500 rupees per day")]
         })
         logger.info(f"Food cost result: {result}")
         print("\n" + "="*50)
@@ -57,7 +58,7 @@ async def main():
         # Example 2: Calculate hotel costs
         logger.info("Processing example query: hotel cost calculation")
         result = await agent.ainvoke({
-            "input": "Calculate hotel cost for 4 nights at 2000 rupees per night"
+            "messages": [HumanMessage(content="Calculate hotel cost for 4 nights at 2000 rupees per night")]
         })
         logger.info(f"Hotel cost result: {result}")
         print("\n" + "="*50)
@@ -68,7 +69,7 @@ async def main():
         # Example 3: Calculate transport costs
         logger.info("Processing example query: transport cost calculation")
         result = await agent.ainvoke({
-            "input": "Calculate transport cost for 300 km by train"
+            "messages": [HumanMessage(content="Calculate transport cost for 300 km by train")]
         })
         logger.info(f"Transport cost result: {result}")
         print("\n" + "="*50)
@@ -79,7 +80,7 @@ async def main():
         # Example 4: Get total budget
         logger.info("Processing example query: total budget summary")
         result = await agent.ainvoke({
-            "input": "Show me the total trip budget summary"
+            "messages": [HumanMessage(content="Show me the total trip budget summary")]
         })
         logger.info(f"Total budget result: {result}")
         print("\n" + "="*50)
@@ -136,7 +137,9 @@ async def interactive_mode():
                     continue
                 
                 logger.info(f"Processing user query: {user_input}")
-                result = await agent.ainvoke({"input": user_input})
+                result = await agent.ainvoke({
+                    "messages": [HumanMessage(content=user_input)]
+                })
                 
                 output = result.get('output', result)
                 print(f"\n🤖 Agent: {output}")
