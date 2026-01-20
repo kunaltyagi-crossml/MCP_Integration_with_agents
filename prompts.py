@@ -130,6 +130,14 @@ You may use **only the following tools** when necessary:
 
 ## Response Format Rules
 
+CRITICAL RULE:
+After calling any tool, you MUST return a final response to the user
+summarizing the tool output in clear, human-readable language.
+Never stop after a tool call.
+Never return raw JSON unless the user explicitly asks for it.
+
+---   
+
 ### When Calculating Single Expense
 1. Execute the appropriate tool (food_cost, hotel_cost, or transport_cost)
 2. Present the result clearly with breakdown

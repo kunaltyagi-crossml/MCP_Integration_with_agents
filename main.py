@@ -44,49 +44,49 @@ async def main():
         # Example queries - you can modify this section
         logger.info("Agent ready to process queries")
         
-        # Example 1: Calculate food costs
-        logger.info("Processing example query: food cost calculation")
-        result = await agent.ainvoke({
-            "messages": [HumanMessage(content="Calculate food cost for 5 days at 500 rupees per day")]
-        })
-        logger.info(f"Food cost result: {result}")
-        print("\n" + "="*50)
-        print("FOOD COST CALCULATION:")
-        print("="*50)
-        print(result.get('output', result))
+        # # Example 1: Calculate food costs
+        # logger.info("Processing example query: food cost calculation")
+        # result = await agent.ainvoke({
+        #     "messages": [HumanMessage(content="Calculate food cost for 5 days at 500 rupees per day")]
+        # })
+        # logger.info(f"Food cost result: {result['messages'][-2].content}")
+        # print("\n" + "="*50)
+        # print("FOOD COST CALCULATION:")
+        # print("="*50)
+        # print(result["messages"][-2].content)
         
         # Example 2: Calculate hotel costs
         logger.info("Processing example query: hotel cost calculation")
         result = await agent.ainvoke({
             "messages": [HumanMessage(content="Calculate hotel cost for 4 nights at 2000 rupees per night")]
         })
-        logger.info(f"Hotel cost result: {result}")
+        logger.info(f"Hotel cost result: {result['messages'][-2].content}")
         print("\n" + "="*50)
         print("HOTEL COST CALCULATION:")
         print("="*50)
-        print(result.get('output', result))
+        print(result["messages"][-2].content)
         
         # Example 3: Calculate transport costs
         logger.info("Processing example query: transport cost calculation")
         result = await agent.ainvoke({
             "messages": [HumanMessage(content="Calculate transport cost for 300 km by train")]
         })
-        logger.info(f"Transport cost result: {result}")
+        logger.info(f"Transport cost result: {result['messages'][-2].content}")
         print("\n" + "="*50)
         print("TRANSPORT COST CALCULATION:")
         print("="*50)
-        print(result.get('output', result))
+        print(result["messages"][-2].content)
         
         # Example 4: Get total budget
         logger.info("Processing example query: total budget summary")
         result = await agent.ainvoke({
             "messages": [HumanMessage(content="Show me the total trip budget summary")]
         })
-        logger.info(f"Total budget result: {result}")
+        logger.info(f"Total budget result: {result['messages'][-2].content}")
         print("\n" + "="*50)
         print("TOTAL BUDGET SUMMARY:")
         print("="*50)
-        print(result.get('output', result))
+        print(result["messages"][-2].content)
         
         logger.info("All example queries processed successfully")
         
@@ -124,35 +124,35 @@ async def interactive_mode():
         print("  - Type 'exit' or 'quit' to end session")
         print("="*60 + "\n")
         
-        while True:
-            try:
-                user_input = input("\n💬 You: ").strip()
+    #     while True:
+    #         try:
+    #             user_input = input("\n💬 You: ").strip()
                 
-                if user_input.lower() in ['exit', 'quit', 'bye']:
-                    logger.info("User requested exit")
-                    print("\n👋 Goodbye! Safe travels!")
-                    break
+    #             if user_input.lower() in ['exit', 'quit', 'bye']:
+    #                 logger.info("User requested exit")
+    #                 print("\n👋 Goodbye! Safe travels!")
+    #                 break
                 
-                if not user_input:
-                    continue
+    #             if not user_input:
+    #                 continue
                 
-                logger.info(f"Processing user query: {user_input}")
-                result = await agent.ainvoke({
-                    "messages": [HumanMessage(content=user_input)]
-                })
+    #             logger.info(f"Processing user query: {user_input}")
+    #             result = await agent.ainvoke({
+    #                 "messages": [HumanMessage(content=user_input)]
+    #             })
                 
-                output = result.get('output', result)
-                print(f"\n🤖 Agent: {output}")
-                logger.debug(f"Agent response: {output}")
+    #             output = result.get('output', result)
+    #             print(f"\n🤖 Agent: {output}")
+    #             logger.debug(f"Agent response: {output}")
                 
-            except KeyboardInterrupt:
-                logger.info("Keyboard interrupt received")
-                print("\n\n👋 Session interrupted. Goodbye!")
-                break
-            except Exception as e:
-                logger.exception("Error processing query in interactive mode")
-                print(f"\n❌ Error: {str(e)}")
-                print("Please try again with a different query.")
+    #         except KeyboardInterrupt:
+    #             logger.info("Keyboard interrupt received")
+    #             print("\n\n👋 Session interrupted. Goodbye!")
+    #             break
+    #         except Exception as e:
+    #             logger.exception("Error processing query in interactive mode")
+    #             print(f"\n❌ Error: {str(e)}")
+    #             print("Please try again with a different query.")
         
     except Exception:
         logger.exception("Error in interactive mode")
